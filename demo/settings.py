@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'viewflow',
     'viewflow.frontend',
     'demo.helloworld',
+    'demo.cr_process',
 ]
 
 MIDDLEWARE = [
