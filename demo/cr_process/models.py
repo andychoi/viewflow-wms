@@ -12,34 +12,47 @@ def get_crid():
     new_cr_id = 'CR-'+datetime.date.today().strftime('%Y%m%d-')+str(new_cr_index).zfill(4)
     return new_cr_id
 class CRProcess(Process):
-    orderid = models.CharField(max_length=32,default=get_crid,unique=True)
+    orderid = models.CharField(max_length=32,default=get_crid,unique=True,verbose_name="Order ID")
     title = models.CharField(max_length=256)
     vendors = [
-        ('OC','OK Circuits'),
-        ('DV','Denivern'),
+        ('OS','On-Site'),
+        ('CL','Cloud'),
     ]
     vendor = models.CharField(max_length=128,choices=vendors)
     product_names = [
-        ('OC','OK Circuits'),
-        ('DV','Denivern'),
+        ('CC','Cisco'),
+        ('JP','Juniper'),
+        ('AWS','AWS'),
+        ('AZ','Azure'),
     ]
-    product_name = models.CharField(max_length=128,choices=product_names)
+    product_name = models.CharField(max_length=128,choices=product_names,verbose_name="Product Name")
     severitys = [
-        ('OC','OK Circuits'),
-        ('DV','Denivern'),
+        ('SD','Standard'),
+        ('NM','Normal'),
+        ('MJ','Major'),
+        ('EM','Emergency'),
     ]
     severity = models.CharField(max_length=128,choices=severitys)
     cr_types = [
-        ('OC','OK Circuits'),
-        ('DV','Denivern'),
+        ('FM','Fault Mgt'),
+        ('PR','Preventive'),
+        ('AD','Adaptive'),
+        ('PF','Perfective'),
     ]
-    cr_type = models.CharField(max_length=128,choices=cr_types)
-    affected_devices = [
-        ('OC','OK Circuits'),
-        ('DV','Denivern'),
+    cr_type = models.CharField(max_length=128,choices=cr_types,verbose_name="CR Type")
+    # affected_devices = [
+    #     ('OC','OK Circuits'),
+    #     ('DV','Denivern'),
+    # ]
+    affected_device = models.CharField(max_length=128,verbose_name="Affected Device")
+    start_time = models.DateTimeField()
+    end_time = models.DateTimeField()
+    approval_choices = [
+        ('AP','Approve'),
+        ('DN','Deny')
     ]
-    affected_device = models.CharField(max_length=128,choices=affected_devices)
-    start_time = models.DateField()
-    end_time = models.DateField()
-    l1_approve = models.BooleanField(default=True)
-    l2_approve = models.BooleanField(default=True)
+    l1_approve = models.CharField(max_length=128,choices=approval_choices,verbose_name="L1 Approval")
+    l1_approve_comment = models.CharField(max_length=1024,null=True,verbose_name="Comment")
+    l2_approve = models.CharField(max_length=128,choices=approval_choices,verbose_name="L2 Approval")
+    l2_approve_comment = models.CharField(max_length=1024,null=True,verbose_name="Comment")
+
