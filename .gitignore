@@ -2,17 +2,29 @@ cr_env
 
 # Files to ignore when building Docker image, basically the same than .gitignore
 
-# Python compiled byte code
+# Django #
+*.log
+*.pot
 *.pyc
+__pycache__
+db.sqlite3
+media
 
-# SQLite3 database
-*.sqlite3
+# Backup files # 
+*.bak 
+
+# Python # 
+*.py[cod] 
+*$py.class 
+
+# Installer logs 
+pip-log.txt 
+pip-delete-this-directory.txt 
 
 # Staticfiles
 staticfiles/
-
-# Compiled messages
-*.mo
+# Static files collected
+/static
 
 # Log files
 *.log
@@ -32,21 +44,38 @@ staticfiles/
 prod.sh
 dev.sh
 
-# Static files collected
-/static
+
+# Jupyter Notebook 
+.ipynb_checkpoints 
+
+# pyenv 
+.python-version 
 
 # Virtual environments
 venv*/
 .venv*/
-
 /.env*
 
-/htmlcov
+# Unit test / coverage reports 
+htmlcov/ 
+.tox/ 
+.coverage 
+.coverage.* 
+.cache 
+.pytest_cache/ 
+nosetests.xml 
+coverage.xml 
+*.cover 
+.hypothesis/ 
 
-# Files from source that aren't needed in the image
-Dockerfile
-README*
-COPYING
-requirements*.in
-requirements.txt
-__*
+# celery 
+celerybeat-schedule.* 
+
+
+# Visual Studio Code # 
+.vscode/* 
+!.vscode/settings.json 
+!.vscode/tasks.json 
+!.vscode/launch.json 
+!.vscode/extensions.json 
+.history
